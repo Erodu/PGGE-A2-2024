@@ -125,31 +125,27 @@ namespace PGGE
                 }
 
                 m_currentState = state;
-
-                if (m_currentState != null)
-                {
-                    /* We are now entering into a new FSMState
-                     * So we will call the Enter method
-                     * of the new current state.
+                /* We are now entering into a new FSMState
+                * So we will call the Enter method
+                * of the new current state.
                      */
-                    m_currentState.Enter();
-                }
+                m_currentState?.Enter(); // Second refactoring change: used a null-conditional operator to simplify this null check.
+
+                // Notes on null-conditional operators here: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/member-access-operators
             }
 
             public void Update()
             {
-                if (m_currentState != null)
-                {
-                    m_currentState.Update();
-                }
+                
+                m_currentState?.Update(); // Third refactoring change: used a null-conditional operator to simplify this null check.
+                
             }
 
             public void FixedUpdate()
             {
-                if (m_currentState != null)
-                {
-                    m_currentState.FixedUpdate();
-                }
+                
+                m_currentState?.FixedUpdate(); // Fourth refactoring change: used a null-conditional operator to simplify this null check.
+
             }
         }
     }
