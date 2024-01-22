@@ -11,13 +11,15 @@ GameObject:
   - component: {fileID: 5848933604106978623}
   - component: {fileID: 1110052236084249904}
   - component: {fileID: 1222977972616352097}
+  - component: {fileID: 9193120861907019350}
+  - component: {fileID: 6801729904609348483}
   m_Layer: 0
   m_Name: MutantPlayer_Networked
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5848933604106978623
 Transform:
   m_ObjectHideFlags: 0
@@ -74,6 +76,73 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!143 &9193120861907019350
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307162176992392513}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6801729904609348483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307162176992392513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 237916ef1c244b443ae7346e061ae7ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mCharacterController: {fileID: 0}
+  mAnimator: {fileID: 3589305502074785620}
+  mWalkSpeed: 1.5
+  mRotationSpeed: 50
+  mFollowCameraForward: 0
+  mTurnRate: 10
+  mAudioSource: {fileID: 400438657076491116}
+  defaultFootsteps:
+  - {fileID: 8300000, guid: 879b6f486ac089f499189088625009cd, type: 3}
+  - {fileID: 8300000, guid: 69992d4bcac6b6f44a41b6e384331fd6, type: 3}
+  - {fileID: 8300000, guid: 02a53e382acf47c4c8a5953baa9ebf89, type: 3}
+  - {fileID: 8300000, guid: e469a8bb2a1383d43ab4104db2b469f9, type: 3}
+  grassFootsteps:
+  - {fileID: 8300000, guid: c2fb18f114cd4a240a782347f2abf776, type: 3}
+  - {fileID: 8300000, guid: ad4c66a6048c0c44faeac8d9ea4e9be8, type: 3}
+  - {fileID: 8300000, guid: b49fe89334dfec64288fbfb874087b27, type: 3}
+  - {fileID: 8300000, guid: dcb20ae4a8bdc9645b53b6847bf15fc9, type: 3}
+  woodFootsteps:
+  - {fileID: 8300000, guid: a19df8659e39fdd4d8c82f17151f8b55, type: 3}
+  - {fileID: 8300000, guid: 4169db646cbdd8b4dabf3931f5ae2963, type: 3}
+  - {fileID: 8300000, guid: 1fcea514edcee944e87d4888732136be, type: 3}
+  - {fileID: 8300000, guid: 7d2dbe4ab3d4d5f45bbafbf6a5af194d, type: 3}
+  - {fileID: 8300000, guid: aed985eab47036a42a2ed9e802eb71d4, type: 3}
+  - {fileID: 8300000, guid: 83ff629820910b24781d4dcbab61150b, type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  mGravity: -10
+  mJumpHeight: 0.5
 --- !u!1001 &8524251124683421356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -155,12 +224,6 @@ PrefabInstance:
       addedObject: {fileID: 3589305502074785620}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a76647c49e5ba1c46b648d6d8893a22b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7016218953593875215}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a76647c49e5ba1c46b648d6d8893a22b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3774578635804076530}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a76647c49e5ba1c46b648d6d8893a22b, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6793113056003944321}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a76647c49e5ba1c46b648d6d8893a22b, type: 3}
       insertIndex: -1
@@ -200,73 +263,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!143 &7016218953593875215
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8830803426988755965}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.1, z: 0}
---- !u!114 &3774578635804076530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8830803426988755965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 237916ef1c244b443ae7346e061ae7ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mCharacterController: {fileID: 0}
-  mAnimator: {fileID: 3589305502074785620}
-  mWalkSpeed: 1.5
-  mRotationSpeed: 50
-  mFollowCameraForward: 0
-  mTurnRate: 10
-  mAudioSource: {fileID: 400438657076491116}
-  defaultFootsteps:
-  - {fileID: 8300000, guid: 879b6f486ac089f499189088625009cd, type: 3}
-  - {fileID: 8300000, guid: 69992d4bcac6b6f44a41b6e384331fd6, type: 3}
-  - {fileID: 8300000, guid: 02a53e382acf47c4c8a5953baa9ebf89, type: 3}
-  - {fileID: 8300000, guid: e469a8bb2a1383d43ab4104db2b469f9, type: 3}
-  grassFootsteps:
-  - {fileID: 8300000, guid: c2fb18f114cd4a240a782347f2abf776, type: 3}
-  - {fileID: 8300000, guid: ad4c66a6048c0c44faeac8d9ea4e9be8, type: 3}
-  - {fileID: 8300000, guid: b49fe89334dfec64288fbfb874087b27, type: 3}
-  - {fileID: 8300000, guid: dcb20ae4a8bdc9645b53b6847bf15fc9, type: 3}
-  woodFootsteps:
-  - {fileID: 8300000, guid: a19df8659e39fdd4d8c82f17151f8b55, type: 3}
-  - {fileID: 8300000, guid: 4169db646cbdd8b4dabf3931f5ae2963, type: 3}
-  - {fileID: 8300000, guid: 1fcea514edcee944e87d4888732136be, type: 3}
-  - {fileID: 8300000, guid: 7d2dbe4ab3d4d5f45bbafbf6a5af194d, type: 3}
-  - {fileID: 8300000, guid: aed985eab47036a42a2ed9e802eb71d4, type: 3}
-  - {fileID: 8300000, guid: 83ff629820910b24781d4dcbab61150b, type: 3}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  mGravity: -10
-  mJumpHeight: 0.5
 --- !u!114 &6793113056003944321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mAnimator: {fileID: 3589305502074785620}
-  mPlayerMovement: {fileID: 3774578635804076530}
+  mPlayerMovement: {fileID: 6801729904609348483}
   attack1Clip: {fileID: -203655887218126122, guid: 98b96be78b8368e42bf4c02c8c9b3d3b, type: 3}
   mCurrentAttackID: 0
   mAttackButtons: 0000

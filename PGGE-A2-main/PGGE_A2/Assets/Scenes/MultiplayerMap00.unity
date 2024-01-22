@@ -154,17 +154,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1161877857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &762251369 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1110052236084249904, guid: 64736b3b90214df46a9e39e4ce078ff8, type: 3}
-  m_PrefabInstance: {fileID: 8887327027984884777}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &877661653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,21 +1134,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6793113056003944321, guid: 64736b3b90214df46a9e39e4ce078ff8, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6793113056003944321, guid: 64736b3b90214df46a9e39e4ce078ff8, type: 3}
-      propertyPath: mPhotonView
-      value: 
-      objectReference: {fileID: 762251369}
     - target: {fileID: 8307162176992392513, guid: 64736b3b90214df46a9e39e4ce078ff8, type: 3}
       propertyPath: m_Name
       value: MutantPlayer_Networked
-      objectReference: {fileID: 0}
-    - target: {fileID: 8307162176992392513, guid: 64736b3b90214df46a9e39e4ce078ff8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
