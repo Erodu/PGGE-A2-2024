@@ -165,7 +165,7 @@ public class PlayerState_Multiplayer_ATTACK : PlayerState_Multiplayer
         Debug.Log("Ammo count: " + mPlayer.mAmunitionCount + ", In Magazine: " + mPlayer.mBulletsInMagazine);
         if (mPlayer.mBulletsInMagazine == 0 && mPlayer.mAmunitionCount > 0)
         {
-            mPlayer.mFsm.SetCurrentState((int)PlayerStateType.RELOAD);
+            mPlayer.mFsm.SetCurrentState((int)PlayerStateType.RECHARGE);
             return;
         }
 
@@ -197,7 +197,7 @@ public class PlayerState_Multiplayer_RELOAD : PlayerState_Multiplayer
     public int previousState;
     public PlayerState_Multiplayer_RELOAD(Player_Multiplayer player) : base(player)
     {
-        mId = (int)(PlayerStateType.RELOAD);
+        mId = (int)(PlayerStateType.RECHARGE);
     }
 
     public override void Enter()
