@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace PGGE
 {
@@ -71,10 +69,10 @@ namespace PGGE
             //store the key, value pair of the set of states.
             //The key will be a unique ID for an
             //application-specific FSMState instance.
-            
+
             protected Dictionary<int, FSMState> m_states = new Dictionary<int, FSMState>();
 
-            public Dictionary<int, FSMState> States {  get { return m_states; } }
+            public Dictionary<int, FSMState> States { get { return m_states; } }
 
             //!The current state that the FSM is in right now.
             protected FSMState m_currentState;
@@ -110,40 +108,16 @@ namespace PGGE
 
             public void SetCurrentState(FSMState state)
             {
-                if (m_currentState != null)
-                {
-                    /* This from theory is the second code path. 
-                     * The first code path is if the 
-                     * m_currentState == null in which case
-                     * nothing happens. 
-                     * If the previous current state is
-                     * valid then we will call the 
-                     * Exit method of the previous
-                     * current state
-                     */
-                    m_currentState.Exit();
-                    state.PreviousState = m_currentState;
-                }
+                m_currentState?.Exit(); // Refactoring Change: Shortened null checks.
 
                 m_currentState = state;
 
-                if (m_currentState != null)
-                {
-                    /* We are now entering into a new FSMState
-                     * So we will call the Enter method
-                     * of the new current state.
-                     */
-                    m_currentState.Enter();
-                }
+                m_currentState?.Enter();
             }
 
             public void Update()
             {
-                if (m_currentState != null)
-                {
-                    m_currentState.Update();
-                    //Debug.WriteLine(m_currentState.ToString());
-                }
+                m_currentState?.Update();
             }
 
             public void FixedUpdate()
