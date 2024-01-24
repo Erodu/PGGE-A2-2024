@@ -14,9 +14,9 @@ namespace PGGE
 
             public byte maxPlayersPerRoom = 3;
 
-            public GameObject mConnectionProgress;
-            public GameObject mBtnJoinRoom;
-            public GameObject mInpPlayerName;
+            [SerializeField] GameObject mConnectionProgress; // Refactoring change: changed to SerializeField private variables instead of public.
+            [SerializeField] GameObject mBtnJoinRoom;
+            [SerializeField] GameObject mInpPlayerName;
 
             bool isConnecting = false;
 
