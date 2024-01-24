@@ -42,9 +42,7 @@ public class PlayerMovement : MonoBehaviour
         mCharacterController = GetComponent<CharacterController>();
     }
 
-    void Update()
-    {
-    }
+    // Refactoring Change: Removed Update method since it wasn't being used.
 
     private void FixedUpdate()
     {
