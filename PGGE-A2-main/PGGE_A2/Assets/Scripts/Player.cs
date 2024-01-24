@@ -4,6 +4,8 @@ using UnityEngine;
 using PGGE.Patterns;
 using PGGE;
 using Photon.Pun;
+using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
 
     [HideInInspector] public bool isRecharging = false;
 
+    public TextMeshPro playerName;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +36,8 @@ public class Player : MonoBehaviour
         mFsm.Add(new PlayerState_ATTACK(this));
         mFsm.Add(new PlayerState_RECHARGE(this));
         mFsm.SetCurrentState((int)PlayerStateType.MOVEMENT);
+
+        playerName.text = mPhotonView.Owner.NickName.ToString();
     }
 
     void Update()

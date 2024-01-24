@@ -5,7 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public AudioSource buttonAudioSource;
+    public AudioSource buttonMultiPlayerAudioSource;
+    public AudioSource buttonSinglePlayerAudioSource;
+    public AudioSource buttonBackAudioSource;
+    public AudioSource buttonJoinAudioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,20 +25,25 @@ public class Menu : MonoBehaviour
     {
         //Debug.Log("Loading singleplayer game");
         SceneManager.LoadScene("SinglePlayer");
-        buttonAudioSource.Play();
+        buttonSinglePlayerAudioSource.Play();
     }
 
     public void OnClickMultiPlayer()
     {
         //Debug.Log("Loading multiplayer game");
         SceneManager.LoadScene("Multiplayer_Launcher");
-        buttonAudioSource.Play();
+        buttonMultiPlayerAudioSource.Play();
     }
     public void OnClickBackToMenu()
     {
         //Debug.Log("Going back to the menu...");
         SceneManager.LoadScene("Menu");
-        buttonAudioSource.Play();
+        buttonBackAudioSource.Play();
+    }
+
+    public void OnClickJoinServer()
+    {
+        buttonJoinAudioSource.Play();
     }
 
 }
