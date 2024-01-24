@@ -94,38 +94,39 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        if (crouch) return;
-
-        // We shall apply movement to the game object here.
-        if (mAnimator == null) return;
-        if (mFollowCameraForward)
+        if (crouch == false) // Refactoring change: more readability with 'if (crouch) return' being changed to a more recognizable if statement.
         {
-            // rotate Player towards the camera forward.
-            Vector3 eu = Camera.main.transform.rotation.eulerAngles;
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                Quaternion.Euler(0.0f, eu.y, 0.0f),
-                mTurnRate * Time.deltaTime);
+            // We shall apply movement to the game object here.
+            if (mAnimator == null) return;
+            if (mFollowCameraForward)
+            {
+                // rotate Player towards the camera forward.
+                Vector3 eu = Camera.main.transform.rotation.eulerAngles;
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    Quaternion.Euler(0.0f, eu.y, 0.0f),
+                    mTurnRate * Time.deltaTime);
+            }
+            else
+            {
+                transform.Rotate(0.0f, hInput * mRotationSpeed * Time.deltaTime, 0.0f);
+            }
+
+            Vector3 forward = transform.TransformDirection(Vector3.forward).normalized;
+            forward.y = 0.0f;
+
+            mCharacterController.Move(forward * vInput * speed * Time.deltaTime);
+            mAnimator.SetFloat("PosX", 0);
+            mAnimator.SetFloat("PosZ", lerpedValue);
+
+            if (jump)
+            {
+                Jump();
+                jump = false;
+            }
+
+            mCharacterController.Move(mVelocity * Time.deltaTime);
         }
-        else
-        {
-            transform.Rotate(0.0f, hInput * mRotationSpeed * Time.deltaTime, 0.0f);
-        }
-
-        Vector3 forward = transform.TransformDirection(Vector3.forward).normalized;
-        forward.y = 0.0f;
-
-        mCharacterController.Move(forward * vInput * speed * Time.deltaTime);
-        mAnimator.SetFloat("PosX", 0);
-        mAnimator.SetFloat("PosZ", lerpedValue);
-
-        if(jump)
-        {
-            Jump();
-            jump = false;
-        }
-
-        mCharacterController.Move(mVelocity * Time.deltaTime);
 
     }
 
