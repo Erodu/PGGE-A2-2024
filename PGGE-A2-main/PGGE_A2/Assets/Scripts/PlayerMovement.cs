@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PGGE;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -37,16 +38,23 @@ public class PlayerMovement : MonoBehaviour
 
     private float lerpedValue = 0f;
 
+    private int staminaCapacity = 100; // Maximum stamina for player.
+    [SerializeField] TextMeshPro staminaText; // Displayed text for the player's stamina.
+    private bool isRunning = false;
+
     void Start()
     {
         mCharacterController = GetComponent<CharacterController>();
+        staminaText.text = staminaCapacity.ToString();
     }
 
     // Refactoring Change: Removed Update method since it wasn't being used.
 
     private void FixedUpdate()
     {
+        Debug.Log("Fixed Update is getting called");
         ApplyGravity();
+        updateStaminaText();
     }
 
     public void HandleInputs()
@@ -65,13 +73,18 @@ public class PlayerMovement : MonoBehaviour
         speed = mWalkSpeed;
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed = mWalkSpeed * 2.0f;
-            // Doing this lerp allows for the walking and running animations to transition between each other more smoothly.
-            lerpedValue = Mathf.Lerp(lerpedValue, 0.9f, 0.05f);
+            if (staminaCapacity > 0)
+            {
+                speed = mWalkSpeed * 2.0f;
+                // Doing this lerp allows for the walking and running animations to transition between each other more smoothly.
+                lerpedValue = Mathf.Lerp(lerpedValue, 0.9f, 0.05f);
+                StartCoroutine(LowerStamina());
+            }
         }
         else
         {
             lerpedValue = Mathf.Lerp(lerpedValue, vInput * 0.5f, 0.05f);
+            StartCoroutine(RegainStamina());
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -193,6 +206,32 @@ public class PlayerMovement : MonoBehaviour
         AudioClip playedSound = footsteps[Random.Range(0, footsteps.Length)];
         mAudioSource.clip = playedSound;
         mAudioSource.PlayOneShot(playedSound);
+    }
+
+    private void updateStaminaText()
+    {
+        if (staminaText == null)
+        {
+            Debug.LogWarning("Stamina Text is Null.");
+        }
+        else
+        {
+            staminaText.text = "Stamina: " + staminaCapacity.ToString();
+            Debug.Log("Updating Stamina...");
+        }
+    }
+    IEnumerator LowerStamina()
+    {
+        //Debug.Log("Lowering Stamina...");
+        yield return new WaitForSeconds(0.5f * Time.deltaTime);
+        staminaCapacity -= 1;
+    }
+
+    IEnumerator RegainStamina()
+    {
+        Debug.Log("Regaining Stamina...");
+        yield return new WaitForSeconds(0.5f * Time.deltaTime);
+        staminaCapacity += 2;
     }
 
 }
