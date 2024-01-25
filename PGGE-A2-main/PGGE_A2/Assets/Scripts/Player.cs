@@ -27,6 +27,10 @@ public class Player : MonoBehaviour
 
     public TextMeshPro playerName;
 
+    // Icons for both light and heavy attacks.
+    [SerializeField] RawImage lightAttackIcon;
+    [SerializeField] RawImage heavyAttackIcon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +41,7 @@ public class Player : MonoBehaviour
         mFsm.Add(new PlayerState_RECHARGE(this));
         mFsm.SetCurrentState((int)PlayerStateType.MOVEMENT);
 
-        playerName.text = mPhotonView.Owner.NickName.ToString();
+        playerName.text = mPhotonView.Owner.NickName.ToString(); // Changes the player name text to be the owner's NickName from within the Photon View.
     }
 
     void Update()
@@ -51,6 +55,7 @@ public class Player : MonoBehaviour
             mAttackButtons[0] = true;
             mAttackButtons[1] = false;
             //mAttackButtons[2] = false;
+            StartCoroutine(LightAttackCooldown());
         }
         else
         {
@@ -62,6 +67,7 @@ public class Player : MonoBehaviour
             mAttackButtons[0] = false;
             mAttackButtons[1] = true;
             //mAttackButtons[2] = false;
+            StartCoroutine(HeavyAttackCooldown());
         }
         else
         {
@@ -105,5 +111,20 @@ public class Player : MonoBehaviour
         // This function is used in an Animation Event. Just in case the state doesn't transition back to movement IMMEDIATELY when the animation ends.
         mAnimator.SetBool("Attack" + (mCurrentAttackID+1), false);
         mFsm.SetCurrentState((int)PlayerStateType.MOVEMENT);
+    }
+
+    IEnumerator LightAttackCooldown()
+    {
+        // Cooldown for the light attack is roughly one second.
+        lightAttackIcon.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        lightAttackIcon.gameObject.SetActive(true);
+    }
+    IEnumerator HeavyAttackCooldown()
+    {
+        // Cooldown for the heavy attack is roughly 1.4 seconds.
+        heavyAttackIcon.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1.4f);
+        heavyAttackIcon.gameObject.SetActive(true);
     }
 }

@@ -234,7 +234,7 @@ public class PlayerMovement : MonoBehaviour
             staminaCapacity -= 1;
 
             yield return new WaitForSeconds(5f);
-            
+            // Try to make sure that stamina can't go below 0.
             if (staminaCapacity < 0)
             {
                 staminaCapacity = 0;
@@ -252,6 +252,7 @@ public class PlayerMovement : MonoBehaviour
             staminaCapacity += 1;
 
             yield return new WaitForSeconds(5f);
+            // Try to make sure that stamina cannot exceed 100.
             if (staminaCapacity > 100)
             {
                 staminaCapacity = 100;
