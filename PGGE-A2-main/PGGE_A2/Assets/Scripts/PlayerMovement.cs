@@ -39,12 +39,13 @@ public class PlayerMovement : MonoBehaviour
     private float lerpedValue = 0f;
 
     private int staminaCapacity = 100; // Maximum stamina for player.
-    [SerializeField] TextMeshPro staminaText; // Displayed text for the player's stamina.
+    [SerializeField] TextMeshProUGUI staminaText; // Displayed text for the player's stamina.
     private bool isRunning = false;
 
     void Start()
     {
         mCharacterController = GetComponent<CharacterController>();
+        staminaText = GetComponentInChildren<TextMeshProUGUI>();
         staminaText.text = staminaCapacity.ToString();
     }
 
@@ -73,7 +74,8 @@ public class PlayerMovement : MonoBehaviour
         speed = mWalkSpeed;
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if (staminaCapacity > 0)
+            isRunning = true;
+            if (staminaCapacity > 0 && isRunning == true)
             {
                 speed = mWalkSpeed * 2.0f;
                 // Doing this lerp allows for the walking and running animations to transition between each other more smoothly.
@@ -84,7 +86,10 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             lerpedValue = Mathf.Lerp(lerpedValue, vInput * 0.5f, 0.05f);
-            StartCoroutine(RegainStamina());
+            if (staminaCapacity < 100)
+            {
+                StartCoroutine(RegainStamina());
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -223,15 +228,35 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator LowerStamina()
     {
         //Debug.Log("Lowering Stamina...");
-        yield return new WaitForSeconds(0.5f * Time.deltaTime);
-        staminaCapacity -= 1;
+        while (staminaCapacity > 0)
+        {
+            yield return null; // This is to wait for the next frame before decrementing by 1.
+            staminaCapacity -= 1;
+
+            yield return new WaitForSeconds(5f);
+            
+            if (staminaCapacity < 0)
+            {
+                staminaCapacity = 0;
+            }
+        }
+        isRunning = false;
     }
 
     IEnumerator RegainStamina()
     {
-        Debug.Log("Regaining Stamina...");
-        yield return new WaitForSeconds(0.5f * Time.deltaTime);
-        staminaCapacity += 2;
+        //Debug.Log("Regaining Stamina...");
+        while (staminaCapacity < 100)
+        {
+            yield return null; // This is to wait for the next frame before incrementing by 1.
+            staminaCapacity += 1;
+
+            yield return new WaitForSeconds(5f);
+            if (staminaCapacity > 100)
+            {
+                staminaCapacity = 100;
+            }
+        }
     }
 
 }

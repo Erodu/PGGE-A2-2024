@@ -898,6 +898,7 @@ MonoBehaviour:
     m_Bits: 0
   mGravity: -30
   mJumpHeight: 1
+  staminaText: {fileID: 0}
 --- !u!114 &2028064569042939155
 MonoBehaviour:
   m_ObjectHideFlags: 0
