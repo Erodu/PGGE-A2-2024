@@ -80,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
                 speed = mWalkSpeed * 2.0f;
                 // Doing this lerp allows for the walking and running animations to transition between each other more smoothly.
                 lerpedValue = Mathf.Lerp(lerpedValue, 0.9f, 0.05f);
+                // Begin to lower stamina while player is running.
                 StartCoroutine(LowerStamina());
             }
         }
@@ -88,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
             lerpedValue = Mathf.Lerp(lerpedValue, vInput * 0.5f, 0.05f);
             if (staminaCapacity < 100)
             {
+                // Regain stamina while player is not running.
                 StartCoroutine(RegainStamina());
             }
         }
